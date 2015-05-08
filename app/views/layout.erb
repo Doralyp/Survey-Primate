@@ -22,7 +22,12 @@
 <body>
 <div id="content">
   <header>
-
+    <h1>Survey Primate</h1>
+    <% if current_user %>
+      <%= erb :_log_out, layout: false %>
+    <% else %>
+      <%= erb :_log_in, layout: false %>
+    <% end %>
   </header>
   <%= yield %>
 </div>
