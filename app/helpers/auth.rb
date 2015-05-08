@@ -5,3 +5,7 @@ def current_user
     return nil
   end
 end
+
+def must_be_logged_in
+  redirect '/' unless current_user
+end
