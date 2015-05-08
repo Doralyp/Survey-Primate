@@ -1,12 +1,13 @@
 get '/users/:id' do
   user = User.find(params[:id])
+  redirect '/?error=unauthorized_user' unless current_user == user
   erb :'users/show', locals: {user: user}
 end
 
 put '/users/:id' do
   user = User.find(params[:id])
   user.assign_attributes(params[:user])
-  [500, "Something went horribly wrong"] unless user.save
+  return [500, "Something went horribly wrong"] unless user.save
 
   redirect "/users/#{params[:id]}"
 end
