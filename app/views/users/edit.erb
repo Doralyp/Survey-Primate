@@ -1,0 +1,7 @@
+<form action='/users/<%= user.id %>' method ='post'>
+  <input type='hidden' name="_method" value="put" />
+  <input type='text' name="user[name]" value="<%= user.name %>" />
+  <input type='text' name="user[email]" value="<%= user.email %>" />
+  <input type='password' name="user[password_hash]" />
+  <input type='submit' value='Update Profile' />
+</form>
