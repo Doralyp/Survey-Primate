@@ -20,7 +20,8 @@ A survey will have many questions. Each question will have many possible respons
 # Team Trello board
 
 
-# Wireframes
+# Schema
+![Survey-Primate Schema](schema.jpg)
 
 # Team dynamic and git workflow.
 Doraly - Git Master
