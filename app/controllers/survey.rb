@@ -11,12 +11,15 @@ post '/surveys/create' do
   redirect "/surveys/#{id}"
 end
 
+get '/surveys/invite_user' do
+  erb :"surveys/invite_user"
+end
+
 post '/surveys/invite_user' do
 end
 
 get '/surveys/:id' do |survey_id|
   current_survey = Survey.find(survey_id)
-
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
@@ -37,6 +40,11 @@ end
 
 delete '/surveys/:id/delete' do |survey_id|
   redirect "/users/#{user.id}"
+end
+
+get '/surveys/:id/edit' do |survey_id|
+  survey = Survey.find(survey_id)
+  erb :"/surveys/edit" , locals: {survey: survey}
 end
 
 put '/surveys/:id/edit' do |survey_id|

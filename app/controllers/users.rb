@@ -16,6 +16,5 @@ delete '/users/:id' do
 end
 
 get '/users/:id/edit' do
-  user = User.find(params[:id])
-  erb :'users/edit', locals: {user: user}
+  erb :'users/edit'
 end
