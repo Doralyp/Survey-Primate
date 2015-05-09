@@ -1,0 +1,43 @@
+body {
+  color: #777;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#container {
+  padding: 30px;
+  width: 80%;
+}
+
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+#form-logout {
+  display: none;
+}
+
+#form-login {
+  margin-top: 8px;
+}
+
+#form-signup {
+  margin: 0;
+}
+
+label{
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  padding-bottom: 15px;
+}
