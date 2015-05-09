@@ -4,6 +4,7 @@ get '/surveys/create' do
 end
 
 post '/surveys/create' do
+  must_be_logged_in
   user = User.find(current_user.id)
   survey = Survey.new(params[:new_survey])
   survey.user = user
@@ -20,21 +21,10 @@ get '/surveys/:id/create_questions' do |survey_id|
 end
 
 post '/surveys/:id/create_questions' do |survey_id|
-  survey = Survey.find(survey_id) # NEEDS TO BE REFACTORED - aceburgess
-  new_question = Question.new(params[:new_question])
-  new_question.survey = survey
-  new_question.save
-  new_choices = params[:new_choice].values.map do |input|
-    if !!input
-      new_choice = Choice.new(choice: input)
-      new_choice.question = new_question
-      new_choice.save
-    end
-  end
-  if new_question.choices.first
+  if add_question_to_survey params[:new_question], params[:new_choice], survey_id
     redirect "/surveys/#{survey_id}/create_questions"
   end
-  redirect '/'
+  redirect '/?error=not_valid_input'
 end
 
 post '/surveys/:id/finalize_survey' do |survey_id|
@@ -51,6 +41,7 @@ post '/surveys/:id/finalize_survey' do |survey_id|
       end
     end
   end
+  Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
   if survey
     redirect "/surveys/#{survey_id}"
   end
@@ -73,12 +64,13 @@ post '/surveys/:id/invite_user/:id' do |survey_id, user_id|
 end
 
 get '/surveys/:id' do |survey_id|
+  must_be_invited(survey_id)
   current_survey = Survey.find(survey_id)
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
 post '/surveys/:id/fill_out' do |survey_id|
-  completion = Completion.where(survey_id: survey_id, user_id: current_user.id)
+  completion = Completion.find_by(survey_id: survey_id, user_id: current_user.id)
   total_questions = Survey.find(survey_id).questions.count
   params[:choice].each do |choice_text, choice_id|
     answer = Answer.new
@@ -86,9 +78,9 @@ post '/surveys/:id/fill_out' do |survey_id|
     answer.choice = Choice.find(choice_id)
     answer.save
   end
-  p completion
-  total_answers = completion.answers.count
+  total_answers = completion.answers.first.count
   if total_questions == total_answers
+    completion.completed = true
     redirect "/surveys/#{:id}/summary"
   else
     redirect "?error=unanswered_questions"
