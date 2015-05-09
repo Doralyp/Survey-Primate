@@ -1,3 +1,4 @@
+<h4><%= question.question %></h4>
 <% question.choices.each do |choice| %>
   <%= erb :"surveys/_choice", locals: {choice: choice, question: question}, layout: false %>
 <% end %>
