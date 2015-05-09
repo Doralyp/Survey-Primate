@@ -1,11 +1,39 @@
 <nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <div class="nav navbar-nav navbar-right">
-      <form id="form-login" class="inline-block" method="post" action="/log_in">
-        <input type="text" name="user[email]" placeholder="email">
-        <input type="password" name="user[password]" placeholder="password">
-        <input type="submit" value="Login" class="btn btn-primary">
-      </form>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Survey Primate</a>
     </div>
-  </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li><a href="#"><span class='glyphicon glyphicon-plus'></span>new survey
+</a></li>
+          <form id="form-logout"method="post" action="/log_out"></form>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a id="logout-link" href="#">Logout</a></li>
+            </ul>
+          </li>
+        <% else %>
+        <form id="form-login" class="inline-block" method="post" action="/log_in">
+          <input type="text" name="user[email]" placeholder="email">
+          <input type="password" name="user[password]" placeholder="password">
+          <input type="submit" value="Login" class="btn btn-primary">
+        </form>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
