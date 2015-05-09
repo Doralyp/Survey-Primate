@@ -15,7 +15,8 @@ post '/surveys/invite_user' do
 end
 
 get '/surveys/:id' do |survey_id|
-  current_survey = survey.find(survey_id)
+  current_survey = Survey.find(survey_id)
+
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
