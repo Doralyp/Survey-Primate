@@ -1,4 +1,4 @@
-class CompletionChoice < ActiveRecord::Base
+class Answer < ActiveRecord::Base
   belongs_to :completion
   belongs_to :choice
 
