@@ -1,0 +1,6 @@
+<form action="/surveys/:id/fill_out" method="post">
+  <% question.choices.each do |choice| %>
+    <%= erb :"/surveys/_choice", locals: {choice: choice} %>
+  <% end %>
+  <input type="submit" name="submit"/>
+</form>
