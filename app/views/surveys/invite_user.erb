@@ -1,0 +1,5 @@
+<% users.each do |user| %>
+  <ul>
+    <%= erb :"users/_show_single", locals: {user: user, survey: survey, completions: completions} , layout: false %>
+  </ul>
+<% end %>
