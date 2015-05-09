@@ -1,4 +1,4 @@
-class Answers < ActiveRecord::Migration
+class CreateAnswersTable < ActiveRecord::Migration
   def change
     create_table :answers do |t|
       t.integer :completion_id, null: false
