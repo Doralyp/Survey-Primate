@@ -61,13 +61,6 @@ get '/surveys/:id/invite_user' do |id|
   users = User.all
   survey = Survey.find(id)
   completions = Completion.where(survey: survey)
-
-
-  # user_ids = []
-  # survey.completions.each do |completion|
-  #   user_ids << completion.user_id
-  # end
-  # users_to_add = User.where.not(user_id: user_ids)
   erb :"surveys/invite_user", locals: {users: users, survey: survey, completions: completions}
 end
 
