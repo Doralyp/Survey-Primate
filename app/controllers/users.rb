@@ -1,7 +1,9 @@
 get '/users/:id' do
   user = User.find(params[:id])
   redirect '/?error=unauthorized_user' unless current_user == user
-  erb :'users/show', locals: {user: user}
+  pending_surveys = User.pending_surveys(current_user.id)
+  completed_surveys =User.completed_surveys(current_user.id)
+  erb :'users/show', locals: {user: user, pending_surveys: pending_surveys, completed_surveys: completed_surveys}
 end
 
 put '/users/:id' do

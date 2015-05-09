@@ -2,11 +2,17 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :surveys
   has_many :completions
-
   validates :name, presence: true
   validates :email, presence: true
-  # validates :password_hash, presence: true
+  validates :password_hash, presence: true
 
+  def self.pending_surveys(user_id)
+    Completion.where(user_id: user_id, completed: false)
+  end
+
+  def self.completed_surveys(user_id)
+    Completion.where(user_id: user_id, completed: true)
+  end
 
   def password
     @password ||= Password.new(password_hash)
