@@ -5,7 +5,7 @@ User.create(name: "Dora Pantaleon", email: "me@dp.com", password: "1234")
 User.create(name: "Ace Burgess", email: "me@ab.com", password: "1234")
 
 #Surveys
-Survey.create(title:"All about you Survey", picture_url: "http://www.mekreview.com/wp-content/uploads/2013/10/you-de.png" , user_id:1)
+Survey.create(title:"All about you survey", picture_url: "http://www.mekreview.com/wp-content/uploads/2013/10/you-de.png" , user_id:1)
 Survey.create(title:"TV Survey", picture_url:"http://wp.production.patheos.com/blogs/adrianwarnock/files/2013/10/TV-shutterstock_23301313.jpg" , user_id:3)
 
 #TV Survey

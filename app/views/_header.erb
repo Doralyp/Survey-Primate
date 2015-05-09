@@ -2,26 +2,30 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Survey Primate</a>
+      <% if current_user %>
+        <a class="navbar-brand" href="/users/<%= current_user.id %>">Survey Primate</a>
+      <% else %>
+        <a class="navbar-brand" href="/">Survey Primate</a>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li><a href="#"><span class='glyphicon glyphicon-plus'></span>new survey
+          <li><a href="/surveys/create"><span class='glyphicon glyphicon-plus'></span>new survey
 </a></li>
           <form id="form-logout"method="post" action="/log_out"></form>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Profile</a></li>
+              <li><a href="/users/<%= current_user.id %>/edit">Edit Profile</a></li>
               <li class="divider"></li>
               <li><a id="logout-link" href="#">Logout</a></li>
             </ul>

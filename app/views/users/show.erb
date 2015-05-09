@@ -1,12 +1,17 @@
-<h2>Welcome <%= user.name %></h2>
-
+<h2>Welcome <%= current_user.name %></h2>
+<h3>Pending Surveys</h3>
 <ul class="pending-surveys">
   <li>The Most Fascinating Survey You'll Never Take</li>
   <li>Also, this one!</li>
 </ul>
-
+<h3>Completed Surveys</h3>
 <ul class="completed-surveys">
   <li>This Survey Has Been Completed</li>
   <li>This One, You Failed</li>
 </ul>
-
+<h3>Surveys that I have created</h3>
+<ul class="created-surveys">
+  <% current_user.surveys.each do |survey| %>
+    <li><a href="/surveys/<%= survey.id %>"><%= survey.title %></a></li>
+  <% end %>
+</ul>
