@@ -1,14 +1,22 @@
 get '/surveys/create' do
   must_be_logged_in
-  erb :"surveys/show", locals: {user: current_user}
+  erb :"surveys/new", locals: {user: current_user}
 end
 
 post '/surveys/create' do
-  user = User.find(params[:user][:user_id])
-  survey = Survey.create(params[:new_survey])
-  invited_users = []
-  params[:invited_users].each {|user_id| invited_users << User.find(user_id)}
-  redirect "/surveys/#{id}"
+  user = User.find(current_user.id)
+  survey = Survey.new(params[:new_survey])
+  survey.user = user
+  if survey && survey.save
+    redirect "/surveys/#{survey.id}/create_questions"
+  else
+    redirect back
+  end
+end
+
+get '/surveys/:id/create_questions' do |survey_id|
+  survey = Survey.find(survey_id)
+  erb :"/surveys/new_questions", locals: {survey: survey, user: current_user}
 end
 
 get '/surveys/invite_user' do

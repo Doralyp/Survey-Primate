@@ -1,0 +1,18 @@
+<div class="col-md-3"></div>
+<div class="col-md-6">
+  <h4>New Survey: <%=survey.title%> by <%= %></h4>
+  <h5>Add question below</h5>
+  <form action="/surveys/<%=survey.id%>/create_questions" method="post">
+    Question: <input type="text" name="new_question[question]" placeholder="Question"><br><br>
+    <h5>Add possible choices</h5>
+    Choice 1:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
+    Choice 2:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
+    Choice 3:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
+    Choice 4:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
+    <input type="submit" value="Create Another Question"/>
+  </form>
+  <form action="/surveys/<%=survey.id%>/save_survey" method="post">
+    <input type="submit" value="Create Survey">
+  </form>
+</div>
+<div class="col-md-3"></div>
