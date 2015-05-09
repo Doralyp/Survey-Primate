@@ -62,3 +62,6 @@ Choice.create(question_id: 8, choice: "Reggaeton" )
 Choice.create(question_id: 8, choice: "Hip Hop" )
 Choice.create(question_id: 8, choice: "Country" )
 Choice.create(question_id: 8, choice: "Rap" )
+
+Completion.create(user_id: 1, survey_id: 2)
+Completion.create(user_id: 1, survey_id: 1)

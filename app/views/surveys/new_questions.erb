@@ -1,18 +1,26 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
-  <h4>New Survey: <%=survey.title%> by <%= %></h4>
+  <h4>New Survey: <%=survey.title%> by <%= user.name %></h4>
+  <% if survey.questions.count > 0 %>
+    <h4>Current Questions:</h4>
+      <ul>
+      <% survey.questions.each do |question| %>
+        <li><%= question.question %></li>
+      <% end %>
+      </ul>
+  <% end %>
   <h5>Add question below</h5>
   <form action="/surveys/<%=survey.id%>/create_questions" method="post">
     Question: <input type="text" name="new_question[question]" placeholder="Question"><br><br>
     <h5>Add possible choices</h5>
-    Choice 1:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
-    Choice 2:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
-    Choice 3:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
-    Choice 4:<input type="url" name="new_question[choice1]" placeholder="Choice"><br>
+    Choice 1: <input type="text" name="new_choice[choice1]" placeholder="Choice"><br>
+    Choice 2: <input type="text" name="new_choice[choice2]" placeholder="Choice"><br>
+    Choice 3: <input type="text" name="new_choice[choice3]" placeholder="Choice"><br>
+    Choice 4: <input type="text" name="new_choice[choice4]" placeholder="Choice"><br>
     <input type="submit" value="Create Another Question"/>
   </form>
-  <form action="/surveys/<%=survey.id%>/save_survey" method="post">
-    <input type="submit" value="Create Survey">
+  <form action="/surveys/<%=survey.id%>/finalize_survey" method="post">
+    <input type="submit" value="Finalize Survey">
   </form>
 </div>
 <div class="col-md-3"></div>
