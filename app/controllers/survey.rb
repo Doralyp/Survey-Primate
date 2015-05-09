@@ -57,11 +57,26 @@ post '/surveys/:id/finalize_survey' do |survey_id|
   redirect '/'
 end
 
-get '/surveys/invite_user' do
-  erb :"surveys/invite_user"
+get '/surveys/:id/invite_user' do |id|
+  users = User.all
+  survey = Survey.find(id)
+  completions = Completion.where(survey: survey)
+
+
+  # user_ids = []
+  # survey.completions.each do |completion|
+  #   user_ids << completion.user_id
+  # end
+  # users_to_add = User.where.not(user_id: user_ids)
+  erb :"surveys/invite_user", locals: {users: users, survey: survey, completions: completions}
 end
 
-post '/surveys/invite_user' do
+post '/surveys/:id/invite_user/:id' do |survey_id, user_id|
+  user = User.find(user_id)
+  survey = Survey.find(survey_id)
+  completion = Completion.new(user_id: user_id, survey_id: survey_id)
+  return [500, "Couldn't add this user to the survey"] unless completion.save
+  redirect back
 end
 
 get '/surveys/:id' do |survey_id|

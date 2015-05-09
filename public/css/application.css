@@ -41,3 +41,16 @@ label{
 h2, h3 {
   padding-bottom: 15px;
 }
+
+.btn-invite-user {
+  display: inline;
+  background-repeat:no-repeat;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: .8em;
+}
+
+.btn-invite-user:hover {
+  color: #3498db;
+}
