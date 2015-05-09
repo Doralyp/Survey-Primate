@@ -8,7 +8,6 @@ put '/users/:id' do
   user = User.find(params[:id])
   user.assign_attributes(params[:user])
   return [500, "Something went horribly wrong"] unless user.save
-
   redirect "/users/#{params[:id]}"
 end
 

@@ -1,6 +1,5 @@
 get '/surveys/create' do
   must_be_logged_in
-
   erb :"surveys/show", locals: {user: current_user}
 end
 
@@ -13,12 +12,10 @@ post '/surveys/create' do
 end
 
 post '/surveys/invite_user' do
-
 end
 
 get '/surveys/:id' do |survey_id|
   current_survey = survey.find(survey_id)
-
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
@@ -42,11 +39,9 @@ delete '/surveys/:id/delete' do |survey_id|
 end
 
 put '/surveys/:id/edit' do |survey_id|
-
   redirect "/surveys/#{survey.id}"
 end
 
 get '/surveys/:id/results' do |survey_id|
-
   erb :"surveys/results"
 end
