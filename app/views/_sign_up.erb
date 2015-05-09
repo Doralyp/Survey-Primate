@@ -1,6 +1,15 @@
-<form method="post" action="/sign_up">
-  <input type="text" name="new_user[name]" placeholder="name">
-  <input type="email" name="new_user[email]" placeholder="email">
-  <input type="password" name="new_user[password]" placeholder="password">
-  <input type="submit" value="signup">
+<form id="form-sign-up" method="post" action="/sign_up">
+  <div class="form-group">
+    <label class="block">Name</label>
+    <input type="text" name="new_user[name]" placeholder="name">
+  </div>
+  <div class="form-group">
+    <label class="block">Email</label>
+    <input type="email" name="new_user[email]" placeholder="email">
+  </div>
+  <div class="form-group">
+    <label class="block">Password</label>
+    <input type="password" name="new_user[password]" placeholder="password">
+  </div>
+  <input class="btn btn-primary" type="submit" value="signup">
 </form>

@@ -1,0 +1,19 @@
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#container {
+  padding: 30px;
+  width: 80%;
+}
+
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
