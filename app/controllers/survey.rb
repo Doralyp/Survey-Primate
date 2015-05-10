@@ -6,8 +6,11 @@ end
 post '/surveys/create' do
   must_be_logged_in
   user = User.find(current_user.id)
+  url = process_image(params[:thefile][:filename], params[:thefile][:tempfile].read)
+
   survey = Survey.new(params[:new_survey])
   survey.user = user
+  survey.picture_url = url
   if survey && survey.save
     redirect "/surveys/#{survey.id}/create_questions"
   else

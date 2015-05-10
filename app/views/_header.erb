@@ -9,9 +9,9 @@
         <span class="icon-bar"></span>
       </button>
       <% if current_user %>
-        <a class="navbar-brand" href="/users/<%= current_user.id %>">Survey Primate</a>
+        <a class="navbar-brand" href="/users/<%= current_user.id %>"><span class="glyphicon glyphicon-edit"></span> Survey Primate</a>
       <% else %>
-        <a class="navbar-brand" href="/">Survey Primate</a>
+        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-edit"></span> Survey Primate</a>
       <% end %>
     </div>
 
