@@ -24,4 +24,10 @@ class Survey < ActiveRecord::Base
     end
   end
 
+  def questions_choices_array
+    questions.map do |q|
+      [q.question, q.choices_array]
+    end
+  end
+
 end

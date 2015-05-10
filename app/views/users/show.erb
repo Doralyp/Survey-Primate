@@ -17,6 +17,6 @@
 <h3>Surveys that I have created</h3>
 <ul class="created-surveys">
   <% current_user.surveys.each do |survey| %>
-    <li><a href="/surveys/<%= survey.id %>"><%= survey.title %></a></li>
+    <li><a href="/surveys/<%= survey.id %>/results"><%= survey.title %></a></li>
   <% end %>
 </ul>
