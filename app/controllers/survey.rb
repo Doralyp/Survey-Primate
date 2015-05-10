@@ -25,32 +25,43 @@ get '/surveys/:id/create_questions' do |survey_id|
 end
 
 post '/surveys/:id/create_questions' do |survey_id|
-  if Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
+  p params
+  survey = Survey.find(survey_id)
+  redirect '?error=not_valid_input' unless Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
+  if request.xhr? && params[:finalize]
+    completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
+    erb :"/surveys/show_summary", locals: {survey: survey, completion: completion}, layout: false
+  elsif request.xhr? && params[:create_another]
+    erb :"/surveys/new_questions", locals: {survey: survey, user: current_user}, layout: false
+  elsif params[:finalize]
+    completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
+    redirect "/surveys/#{survey_id}"
+  else
     redirect "/surveys/#{survey_id}/create_questions"
   end
-  redirect '/?error=not_valid_input'
 end
 
-post '/surveys/:id/finalize_survey' do |survey_id|
-  survey = Survey.find(survey_id) # NEEDS TO BE REFACTORED - aceburgess
-  if params[:new_question]
-    new_question = Question.new(params[:new_question])
-    new_question.survey = survey
-    new_question.save
-    new_choices = params[:new_choice].values.map do |input|
-      if !!input
-        new_choice = Choice.new(choice: input)
-        new_choice.question = new_question
-        new_choice.save
-      end
-    end
-  end
-  Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
-  if survey
-    redirect "/surveys/#{survey_id}"
-  end
-  redirect '/'
-end
+# post '/surveys/:id/finalize_survey' do |survey_id|
+#   survey = Survey.find(survey_id) # NEEDS TO BE REFACTORED - aceburgess
+#   p params[:new_question]
+#   if !!params[:new_question]
+#     new_question = Question.new(params[:new_question])
+#     new_question.survey = survey
+#     new_question.save
+#     new_choices = params[:new_choice].values.map do |input|
+#       if !!input
+#         new_choice = Choice.new(choice: input)
+#         new_choice.question = new_question
+#         new_choice.save
+#       end
+#     end
+#   end
+#   Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
+#   if survey
+#     redirect "/surveys/#{survey_id}"
+#   end
+#   redirect '/'
+# end
 
 get '/surveys/:id/invite_user' do |id|
   users = User.all
