@@ -1,4 +1,5 @@
 get '/' do
+  redirect "/users/#{current_user.id}" if current_user
   erb :index
 end
 

@@ -65,8 +65,8 @@ end
 
 get '/surveys/:id' do |survey_id|
   must_be_invited(survey_id)
-  survey = Survey.find(survey_id)
-  redirect "/surveys/#{survey_id}/summary" if survey.completed_by?(current_user)
+  current_survey = Survey.find(survey_id)
+  redirect "/surveys/#{survey_id}/summary" if current_survey.completed_by?(current_user)
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
