@@ -73,7 +73,7 @@ end
 post '/surveys/:id/fill_out' do |survey_id|
   completion = Completion.find_by(survey_id: survey_id, user_id: current_user.id)
   total_questions = Survey.find(survey_id).questions.count
-  params[:choice].each do |choice_text, choice_id|
+  params[:choice].each do |question_id, choice_id|
     answer = Answer.new
     answer.completion = completion
     answer.choice = Choice.find(choice_id)
