@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
+gem 'imagemagick'
 # PostgreSQL driver
 gem 'pg'
 
@@ -14,7 +15,6 @@ gem 'bcrypt-ruby'
 gem 'bcrypt'
 gem 'pry'
 gem 'hirb'
-
 gem 'rake'
 
 gem 'shotgun'
