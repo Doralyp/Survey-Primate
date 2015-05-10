@@ -111,6 +111,7 @@ h2, h3 {
 
 .small-container {
   width: 30%;
+  margin: auto;
 }
 
 .clear {
@@ -122,4 +123,13 @@ h2, h3 {
   display: block;
   margin: 0 auto;
   width: 200px;
+}
+
+#file-submit-btn {
+  margin: 25px;
+}
+
+#main {
+  min-height: 600px;
+  border-radius: 0.5%;
 }

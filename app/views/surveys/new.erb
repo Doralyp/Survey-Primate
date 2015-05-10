@@ -1,10 +1,12 @@
-<div class="col-md-3"></div>
-<div class="col-md-6">
-  <h4>Create a New Survey Below</h4>
-  <form action="/surveys/create" method="post" enctype="multipart/form-data">
-    <input type="text" name="new_survey[title]" placeholder="Title"><br>
-    <input type="file" name="thefile"><br>
-    <input type="submit" value="Create Questions"/>
-  </form>
+<div class='small-container'>
+<h3>Create a New Survey Below</h3>
+<form action="/surveys/create" method="post" enctype="multipart/form-data" />
+  <div class="form-group">
+    <input type="text" name="new_survey[title]" placeholder="Title" />
+  </div>
+  <div class="form-group">
+    <input class='center' id='file-submit-btn' type="file" name="thefile" />
+  </div>
+  <input type="submit" value="Create Questions" />
+</form>
 </div>
-<div class="col-md-3"></div>
