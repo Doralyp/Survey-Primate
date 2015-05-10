@@ -83,14 +83,16 @@ post '/surveys/:id/fill_out' do |survey_id|
   if total_questions <= total_answers
     completion.completed = true
     completion.save
-    redirect "/surveys/#{:id}/summary"
+    redirect "/surveys/#{survey_id}/summary"
   else
     redirect "?error=unanswered_questions"
   end
 end
 
 get '/surveys/:id/summary' do |survey_id|
-  erb :"surveys/show_summary"
+  survey = Survey.find(params[:id])
+  completion = Completion.find_by(survey_id: survey.id, user_id: current_user.id)
+  erb :"surveys/show_summary", locals: {survey: survey, completion: completion}
 end
 
 delete '/surveys/:id/delete' do |survey_id|
