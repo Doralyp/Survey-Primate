@@ -18,6 +18,7 @@ gem 'hirb'
 gem 'rake'
 
 gem 'shotgun'
+gem "mini_magick"
 
 group :test do
   gem 'shoulda-matchers'

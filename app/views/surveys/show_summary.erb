@@ -1,3 +1,6 @@
+<% if survey.picture_url %>
+  <img src="<%= survey.picture_url %>" alt="picture of <%= survey.title %>">
+<% end %>
 <h3><%= survey.title %> - (Your Answers)</h3>
 <ul>
   <% survey.questions.each do |q| %>

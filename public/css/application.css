@@ -112,3 +112,14 @@ h2, h3 {
 .small-container {
   width: 30%;
 }
+
+.clear {
+  clear: both;
+}
+
+#survey-image {
+  padding: 25px 0 25px 0;
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+}
