@@ -1,5 +1,27 @@
 body {
   color: #777;
+  background-color: #ecf0f1;
+}
+
+li {
+  list-style-type: none;
+  text-indent: 20px;
+}
+
+a:link {
+ color: #2c3e50;
+}
+
+a:visited {
+  color: #2c3e50;
+}
+a:hover {
+  color: #f0ad4e;
+  text-decoration: none;
+}
+
+a:active {
+  color: #2c3e50;
 }
 
 .center {
@@ -53,4 +75,40 @@ h2, h3 {
 
 .btn-invite-user:hover {
   color: #3498db;
+}
+
+#main {
+  padding: 0 20px 0 20px;
+}
+
+#myVid {
+  min-width: 100%;
+  min-height: auto;
+}
+
+#myVid {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background: url('/imgs/background.jpg') no-repeat;
+  background-size: cover;
+}
+
+#sign-up-bg {
+  color: #ddd;
+  border-radius: 15px;
+  padding: 40px;
+  background-color: rgba(51, 51, 51, 0.7)
+}
+
+.orange {
+  color: #f0ad4e;
+}
+
+.medium-container {
+  width: 60%;
+}
+
+.small-container {
+  width: 30%;
 }

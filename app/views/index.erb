@@ -1,3 +1,15 @@
-<div class="main">
+<div id="sign-up-bg">
   <%= erb :_sign_up, layout: false %>
 </div>
+<video id="myVid" autoplay loop preload="auto" poster="/imgs/background.jpg">
+    <source src="/video/homepage.mp4" type="video/mp4" />
+</video>
+
+<script>
+
+$(document).ready(function() {
+  $('#navbar').addClass('navbar-inverse');
+}); // end document ready
+
+</script>
+
