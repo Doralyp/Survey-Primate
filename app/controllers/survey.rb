@@ -21,7 +21,7 @@ get '/surveys/:id/create_questions' do |survey_id|
 end
 
 post '/surveys/:id/create_questions' do |survey_id|
-  if add_question_to_survey params[:new_question], params[:new_choice], survey_id
+  if Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
     redirect "/surveys/#{survey_id}/create_questions"
   end
   redirect '/?error=not_valid_input'
@@ -65,7 +65,8 @@ end
 
 get '/surveys/:id' do |survey_id|
   must_be_invited(survey_id)
-  current_survey = Survey.find(survey_id)
+  survey = Survey.find(survey_id)
+  redirect "/surveys/#{survey_id}/summary" if survey.completed_by?(current_user)
   erb :"surveys/show", locals: {survey: current_survey}
 end
 
@@ -78,9 +79,10 @@ post '/surveys/:id/fill_out' do |survey_id|
     answer.choice = Choice.find(choice_id)
     answer.save
   end
-  total_answers = completion.answers.first.count
-  if total_questions == total_answers
+  total_answers = completion.answers.count
+  if total_questions <= total_answers
     completion.completed = true
+    completion.save
     redirect "/surveys/#{:id}/summary"
   else
     redirect "?error=unanswered_questions"

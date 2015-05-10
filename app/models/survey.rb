@@ -6,7 +6,11 @@ class Survey < ActiveRecord::Base
 
   validates :title, presence: true
 
-  def add_question_to_survey question, choices, survey_id
+  def completed_by? user
+    !!Completion.find_by(user_id: user.id, survey_id: self.id, completed: true)
+  end
+
+  def self.add_question_to_survey question, choices, survey_id
     survey = Survey.find(survey_id)
     new_question = Question.new(question)
     new_question.survey = survey
