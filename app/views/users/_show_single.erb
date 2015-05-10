@@ -1,5 +1,3 @@
-
-
 <li><%= user.name %>
   <form class="btn-invite-user" method="post" action="/surveys/<%= survey.id %>/invite_user/<%= user.id %>" />
     <% if !(completions.find_by(user_id: user.id)) %>

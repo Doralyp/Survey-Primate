@@ -2,7 +2,7 @@
 <h3>Pending Surveys</h3>
 <ul class="pending-surveys">
   <% pending_surveys.each do |survey| %>
-    <li><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a></li>
+    <li><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a> <span class="label label-warning">New</span></li>
   <% end %>
 
 
