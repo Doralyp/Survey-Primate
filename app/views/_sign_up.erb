@@ -1,18 +1,70 @@
-<h2 class='center'>Easily Create and Deliver Custom Surveys</h2>
-<h3 class='center orange'>Sign up below to get started</h3>
+<h2 class='center orange'>Easily Create and Deliver Custom Surveys</h2>
+<br />
+<br />
+<h3 class='center'>Sign up below to get started in just 3 easy steps</h3>
+<br />
+<br />
+<h3 id='signup-text' class='center orange'>Enter your name, and hit next.</h3>
 <div class='small-container center'>
   <form id="form-signup" class="form-horizontal" role="form" method="post" action="/sign_up">
-    <div class="form-group">
-      <input type="text" name="new_user[name]" class="form-control" id="name" placeholder="Enter name" required minlength="3">
+    <div id='signup-name'>
+      <input type="text" name="new_user[name]" class="input-lg form-control" id="name" placeholder="Enter name">
+      <button id="signup-name-btn" class="btn btn-warning btn-lg">Next</button>
     </div>
-    <div class="form-group">
-      <input type="email" name="new_user[email]" class="form-control" id="email" placeholder="Enter email" required>
+    <div id='signup-email'>
+      <input type="email" name="new_user[email]" class="input-lg form-control" id="email" placeholder="Enter email">
+      <a href='/'><button id="email-back-btn" class="btn btn-warning btn-lg">Back</button></a>
+      <button id="signup-email-btn" class="btn btn-warning btn-lg">Next</button>
     </div>
-    <div class="form-group">
-      <input type="password" name="new_user[password]" class="form-control" id="password" placeholder="Enter password" required minlength="4">
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-warning">Create Account</button>
+    <div id='signup-password'>
+      <input type="password" name="new_user[password]" class="input-lg form-control" id="password" placeholder="Enter password">
+      <a href='/'><button id="password-back-btn" class="btn btn-warning btn-lg">Back</button></a>
+      <input value="Finish" id='signup-submit' type="submit" class="btn-lg btn btn-warning">
     </div>
   </form>
 </div>
+
+<script>
+
+$(document).ready(function() {
+
+  $('#signup-name-btn').click(function(e) {
+    e.preventDefault();
+    $('#signup-name').toggle();
+    $('#signup-name-btn').toggle();
+    $('#signup-email').toggle();
+    $('#signup-email-btn').toggle();
+    $('#signup-text').text('Great, now enter your email.');
+  });
+
+  $('#signup-email-btn').click(function(e) {
+    e.preventDefault();
+    $('#signup-email').toggle();
+    $('#signup-email-btn').toggle();
+    $('#signup-password').toggle();
+    $('#signup-text').text('Finally, choose a password.');
+    $('#signup-submit').toggle();
+  });
+
+  $('#email-back-btn').click(function(e) {
+    e.preventDefault();
+    $('#signup-name').toggle();
+    $('#signup-name-btn').toggle();
+    $('#signup-email').toggle();
+    $('#signup-email-btn').toggle();
+    $('#signup-text').text('Enter your name, and hit next.');
+  });
+
+  $('#password-back-btn').click(function(e) {
+    e.preventDefault();
+    $('#signup-email').toggle();
+    $('#signup-email-btn').toggle();
+    $('#signup-password').toggle();
+    $('#signup-text').text('Great, now enter your email.');
+    $('#signup-submit').toggle();
+  });
+
+
+});
+
+</script>

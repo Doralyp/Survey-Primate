@@ -138,3 +138,27 @@ h2, h3 {
   padding: 15px;
   margin: 15px;
 }
+
+.btn-lg {
+  margin-top: 20px;
+}
+
+#signup-email {
+  display: none;
+}
+
+#signup-password {
+  display: none;
+}
+
+#signup-submit {
+  display: none;
+}
+
+#signup-email-btn {
+  display: none;
+}
+
+#signup-submit {
+  display: none;
+}
