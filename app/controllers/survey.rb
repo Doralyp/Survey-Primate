@@ -92,6 +92,7 @@ end
 get '/surveys/:id/summary' do |survey_id|
   survey = Survey.find(params[:id])
   completion = Completion.find_by(survey_id: survey.id, user_id: current_user.id)
+  redirect '/?error=unauthorized_user' unless completion
   erb :"surveys/show_summary", locals: {survey: survey, completion: completion}
 end
 
@@ -109,5 +110,9 @@ put '/surveys/:id/edit' do |survey_id|
 end
 
 get '/surveys/:id/results' do |survey_id|
-  erb :"surveys/results"
+  survey = Survey.find(survey_id)
+  if request.xhr?
+    return survey.questions_choices_array.to_json
+  end
+  erb :"surveys/results", locals: {survey: survey}
 end

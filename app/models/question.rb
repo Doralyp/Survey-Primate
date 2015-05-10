@@ -4,4 +4,8 @@ class Question < ActiveRecord::Base
 
   validates :question, presence: true
   validates :survey_id, presence: true
+
+  def choices_array
+    choices.map { |c| [c.choice, Answer.where(choice_id: c.id).count] }
+  end
 end
