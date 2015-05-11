@@ -2,14 +2,16 @@
 <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
 <script language="javascript" type="text/javascript" src="/js/graph.js"></script>
 
-<h3>Survey Results</h3>
-<div class='btn-invite-user'>
-  <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a>
-  <a href="/surveys/<%=survey.id%>/edit">Edit</a>
-  <a href="/surveys/<%=survey.id%>/delete">Delete</a>
+<div class="panel panel-default center">
+  <h3>Survey Results</h3>
+  <div class='btn-invite-user'>
+    <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a>
+    <a href="/surveys/<%=survey.id%>/edit">Edit</a>
+    <a href="/surveys/<%=survey.id%>/delete">Delete</a>
+  </div>
 </div>
 <% survey.questions.each_with_index do |q,index| %>
   <h4><%= q.question %></h4>
-  <div id="graph<%= index %>" survey-id="<%= survey.id %>" style="width:400px;height:300px;"></div>
+  <div class="center" id="graph<%= index %>" survey-id="<%= survey.id %>" style="width:400px;height:300px;"></div>
 <% end %>
 
