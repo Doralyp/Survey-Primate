@@ -1,5 +1,9 @@
-<% users.each do |user| %>
-  <ul>
-    <%= erb :"users/_show_single", locals: {user: user, survey: survey, completions: completions} , layout: false %>
-  </ul>
-<% end %>
+<h3 class="center">Please select who you would like to take your survey</h3>
+<div class="panel panel-default center">
+  <% users.each do |user| %>
+    <ul>
+      <%= erb :"users/_show_single", locals: {user: user, survey: survey, completions: completions} , layout: false %>
+    </ul>
+  <% end %>
+  <h3>When finished entering users, results can be viewed here.</h3>
+</div>

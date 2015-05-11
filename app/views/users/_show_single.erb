@@ -1,7 +1,7 @@
-<li><%= user.name %>
+<li class="user-list"><%= user.name %>
   <form class="btn-invite-user" method="post" action="/surveys/<%= survey.id %>/invite_user/<%= user.id %>" />
     <% if !(completions.find_by(user_id: user.id)) %>
-    <input class="btn-invite-user" type="submit" value="Add to Survey">
+      <input class="btn-xs btn btn-warning" type="submit" value="Add to Survey">
     <% end %>
   </form>
 </li>
