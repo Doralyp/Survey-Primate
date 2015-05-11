@@ -22,7 +22,6 @@ $(document).ready(function(){
         }
 
         for(var ii = 0; ii < response[0][i][1].length; ii++){
-          debugger;
           if(response[0][i][1][ii][0] == response[1][i]){
             my_data.push((response[0][i][1][ii][1]/ my_data_total));
           }
