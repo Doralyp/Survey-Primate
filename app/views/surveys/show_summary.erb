@@ -1,3 +1,6 @@
+<script language="javascript" type="text/javascript" src="/js/summary.js"></script>
+
+<div id="SI" completion-id="<%= completion.id %>" survey-id="<%= survey.id %>"></div>
 <div class="center panel-body panel">
   <% if survey.picture_url %>
     <img id='survey-image' src="<%= survey.picture_url %>" alt="picture of <%= survey.title %>">
@@ -5,12 +8,21 @@
   <h5>Survey Successfully Created</h5>
   <p>To add users click here: <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a></p>
   <h3><%= survey.title %></h3>
-  <ul>
-    <% survey.questions.each do |q| %>
-      <h4><%= q.question %></h4>
-      <% if match_question_answer(completion, q) %>
-        <li><em><%= match_question_answer(completion, q).choice %></em></li>
-      <% end %>
-    <% end %>
-  </ul>
+  <% survey.questions.each_with_index do |q,index| %>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= q.question %></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <% if match_question_answer(completion, q) %>
+            <li class="list-group-item">
+              <h4><%= match_question_answer(completion, q).choice %></h4>
+              <p><span class="compare-<%= index %>">0</span>% of Survey Participants Agree With You</p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 </div>
