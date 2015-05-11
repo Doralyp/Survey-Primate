@@ -6,4 +6,7 @@ class Completion < ActiveRecord::Base
   validates :user_id, presence: true
   validates :survey_id, presence: true
 
+  def choice_array
+    answers.map { |ans| ans.choice.choice }
+  end
 end
