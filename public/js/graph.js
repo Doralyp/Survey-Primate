@@ -8,7 +8,7 @@ $(document).ready(function(){
             dataType: "json"
         })
     ).done(function(response){
-        debugger;
+
         for(var i = 0; i < response.length; i++){
 
             var my_data = [];
@@ -27,7 +27,6 @@ $(document).ready(function(){
             for(var ii = 0; ii < response[i][1].length; ii++){
                 my_ticks.push([ii + 1, response[i][1][ii][0]])
             }
-            debugger;
 
             // plot the data
             $.plot($("#graph" + String(i)), [
