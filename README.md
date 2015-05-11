@@ -21,7 +21,7 @@ A survey will have many questions. Each question will have many possible respons
 ![Survey-Primate Schema](schema.jpg)
 
 # Team dynamic and git workflow.
-Doraly - Git/Skeleton Master
-Ace - Ajax Master
-Brendan - CSS Master
+- Doraly - Git/Skeleton Master
+- Ace - Ajax Master
+- Brendan - CSS Master
 
