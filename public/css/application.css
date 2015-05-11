@@ -162,3 +162,8 @@ h2, h3 {
 #signup-submit {
   display: none;
 }
+
+.user-list {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+}
