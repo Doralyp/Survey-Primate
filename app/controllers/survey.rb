@@ -110,10 +110,6 @@ get '/surveys/:id/summary' do |survey_id|
   erb :"surveys/show_summary", locals: {survey: survey, completion: completion}
 end
 
-delete '/surveys/:id/delete' do |survey_id|
-  redirect "/users/#{user.id}"
-end
-
 get '/surveys/:id/edit' do |survey_id|
   survey = Survey.find(survey_id)
   erb :"/surveys/edit" , locals: {survey: survey}
@@ -128,8 +124,10 @@ get '/surveys/:id/delete' do |survey_id|
   erb :"/surveys/delete" , locals: {survey: survey}
 end
 
-post '/surveys/:id/delete' do
-  redirect '/'
+delete '/surveys/:id/delete' do |survey_id|
+  survey = Survey.find(survey_id)
+  survey.destroy
+  redirect "/"
 end
 
 get '/surveys/:id/results' do |survey_id|
