@@ -5,13 +5,15 @@
 <div class="panel panel-default center">
   <h3>Survey Results</h3>
   <div class='btn-invite-user'>
-    <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a>
-    <a href="/surveys/<%=survey.id%>/edit">Edit</a>
-    <a href="/surveys/<%=survey.id%>/delete">Delete</a>
+    <a class="btn btn-warning" href="/surveys/<%=survey.id%>/invite_user">Invite Users</a>
+    <a class="btn btn-warning" href="/surveys/<%=survey.id%>/edit">Edit</a>
+    <a class="btn btn-warning" href="/surveys/<%=survey.id%>/delete">Delete</a>
   </div>
 </div>
 <% survey.questions.each_with_index do |q,index| %>
-  <h4><%= q.question %></h4>
-  <div class="center" id="graph<%= index %>" survey-id="<%= survey.id %>" style="width:400px;height:300px;"></div>
+  <div class = "graph-animate">
+    <h4 class = "center"><%= q.question %></h4>
+    <div class="center graph-item" id="graph<%= index %>" survey-id="<%= survey.id %>"></div>
+    </div>
 <% end %>
 
