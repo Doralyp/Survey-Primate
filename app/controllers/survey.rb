@@ -126,7 +126,8 @@ end
 
 delete '/surveys/:id/delete' do |survey_id|
   survey = Survey.find(survey_id)
-  survey.destroy
+  return [500, "Survey no longer exists."] unless survey
+  survey.destroy if survey.user_id == current_user.id
   redirect "/"
 end
 
