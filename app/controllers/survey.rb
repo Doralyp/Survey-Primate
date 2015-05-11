@@ -25,13 +25,12 @@ get '/surveys/:id/create_questions' do |survey_id|
 end
 
 post '/surveys/:id/create_questions' do |survey_id|
-  p params
   survey = Survey.find(survey_id)
   redirect '?error=not_valid_input' unless Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
   if request.xhr? && params[:finalize]
     completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
     erb :"/surveys/show_summary", locals: {survey: survey, completion: completion}, layout: false
-  elsif request.xhr? && params[:create_another]
+  elsif request.xhr? && params[:create]
     erb :"/surveys/new_questions", locals: {survey: survey, user: current_user}, layout: false
   elsif params[:finalize]
     completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
