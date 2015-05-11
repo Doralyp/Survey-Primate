@@ -14,7 +14,6 @@ gem 'bcrypt-ruby'
 gem 'bcrypt'
 gem 'pry'
 gem 'hirb'
-
 gem 'rake'
 
 gem 'shotgun'

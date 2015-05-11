@@ -70,7 +70,7 @@ h2, h3 {
   cursor:pointer;
   overflow: hidden;
   outline:none;
-  font-size: .8em;
+  font-size: .9em;
 }
 
 .btn-invite-user:hover {
@@ -111,6 +111,7 @@ h2, h3 {
 
 .small-container {
   width: 30%;
+  margin: auto;
 }
 
 .clear {
@@ -122,4 +123,42 @@ h2, h3 {
   display: block;
   margin: 0 auto;
   width: 200px;
+}
+
+#file-submit-btn {
+  margin: 25px;
+}
+
+#main {
+  min-height: 600px;
+  border-radius: 0.5%;
+}
+
+.panel {
+  padding: 15px;
+  margin: 15px;
+}
+
+.btn-lg {
+  margin-top: 20px;
+}
+
+#signup-email {
+  display: none;
+}
+
+#signup-password {
+  display: none;
+}
+
+#signup-submit {
+  display: none;
+}
+
+#signup-email-btn {
+  display: none;
+}
+
+#signup-submit {
+  display: none;
 }

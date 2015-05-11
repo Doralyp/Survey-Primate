@@ -1,22 +1,39 @@
-<h2>Welcome <%= current_user.name %></h2>
-<h3>Pending Surveys</h3>
-<ul class="pending-surveys">
-  <% pending_surveys.each do |survey| %>
-    <li><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a> <span class="label label-warning">New</span></li>
-  <% end %>
+<h3>Welcome <%= current_user.name %></h3>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Pending Surveys</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="pending-surveys list-group">
+      <% pending_surveys.each do |survey| %>
+        <li class="list-group-item"><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a> <span class="label label-warning">New</span></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Completed Surveys</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="completed-surveys list-group">
+      <% completed_surveys.each do |survey| %>
+        <li class="list-group-item"><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-</ul>
-<h3>Completed Surveys</h3>
-<ul class="completed-surveys">
-  <% completed_surveys.each do |survey| %>
-    <li><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a></li>
-  <% end %>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Surveys I Have Created</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="created-surveys list-group">
+      <% current_user.surveys.each do |survey| %>
+        <li class="list-group-item"><a href="/surveys/<%= survey.id %>/results"><%= survey.title %></a></li>
+      <% end %>
+    </ul>
+  </div>
 
-</ul>
-<h3>Surveys that I have created</h3>
-<ul class="created-surveys">
-  <% current_user.surveys.each do |survey| %>
-    <li><a href="/surveys/<%= survey.id %>/results"><%= survey.title %></a></li>
-  <% end %>
-</ul>

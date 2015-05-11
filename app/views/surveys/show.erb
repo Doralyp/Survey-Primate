@@ -1,3 +1,5 @@
+<!-- When is this page ever being displayed? (Dora) right now dashboard redirects to summary or results -->
+
 <div class="col-md-3"></div>
 <div class="col-md-6">
   <h1><%= survey.title %></h1>
@@ -14,6 +16,7 @@
 <div class="col-md-3"></div>
 
 <div>
-  <a href="/surveys/<%=survey.id%>/edit">Edit</a>
   <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a>
+  <a href="/surveys/<%=survey.id%>/edit">Edit</a>
+  <a href="/surveys/<%=survey.id%>/edit">Delete</a>
 </div>
