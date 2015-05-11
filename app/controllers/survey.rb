@@ -5,9 +5,8 @@ end
 
 post '/surveys/create' do
   must_be_logged_in
-  user = User.find(current_user.id)
   survey = Survey.new(params[:new_survey])
-  survey.user = user
+  survey.user = current_user
   if !!params[:thefile]
     url = process_image(params[:thefile][:filename], params[:thefile][:tempfile].read)
     survey.picture_url = url
@@ -40,9 +39,9 @@ post '/surveys/:id/create_questions' do |survey_id|
   end
 end
 
-get '/surveys/:id/invite_user' do |id|
+get '/surveys/:id/invite_user' do |survey_id|
   users = User.all
-  survey = Survey.find(id)
+  survey = Survey.find(survey_id)
   completions = Completion.where(survey: survey)
   erb :"surveys/invite_user", locals: {users: users, survey: survey, completions: completions}
 end
@@ -64,15 +63,8 @@ end
 
 post '/surveys/:id/fill_out' do |survey_id|
   completion = Completion.find_by(survey_id: survey_id, user_id: current_user.id)
-  total_questions = Survey.find(survey_id).questions.count
-  params[:choice].each do |question_id, choice_id|
-    answer = Answer.new
-    answer.completion = completion
-    answer.choice = Choice.find(choice_id)
-    answer.save
-  end
-  total_answers = completion.answers.count
-  if total_questions <= total_answers
+  Answer.save_answer params[:choice], completion
+  if Question.total(survey_id) <= Answer.total(completion)
     completion.completed = true
     completion.save
     redirect "/surveys/#{survey_id}/summary"
