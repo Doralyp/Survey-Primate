@@ -5,18 +5,11 @@ end
 
 post '/surveys/create' do
   must_be_logged_in
-  user = User.find(current_user.id)
   survey = Survey.new(params[:new_survey])
-  survey.user = user
-  if !!params[:thefile]
-    url = process_image(params[:thefile][:filename], params[:thefile][:tempfile].read)
-    survey.picture_url = url
-  end
-  if survey && survey.save
-    redirect "/surveys/#{survey.id}/create_questions"
-  else
-    redirect back
-  end
+  survey.user = current_user
+  upload_image params[:thefile], survey if !!params[:thefile]
+  redirect "/surveys/#{survey.id}/create_questions" if survey && survey.save
+  redirect back
 end
 
 get '/surveys/:id/create_questions' do |survey_id|
@@ -26,23 +19,19 @@ end
 
 post '/surveys/:id/create_questions' do |survey_id|
   survey = Survey.find(survey_id)
-  redirect '?error=not_valid_input' unless Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
-  if request.xhr? && params[:finalize]
-    completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
-    erb :"/surveys/show_summary", locals: {survey: survey, completion: completion}, layout: false
-  elsif request.xhr? && params[:create]
-    erb :"/surveys/new_questions", locals: {survey: survey, user: current_user}, layout: false
-  elsif params[:finalize]
-    completion = Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
-    redirect "/surveys/#{survey_id}"
-  else
-    redirect "/surveys/#{survey_id}/create_questions"
+  added = Survey.add_question_to_survey(params[:new_question], params[:new_choice], survey_id)
+  case
+  when !added then '?error=not_valid_input'
+  when request.xhr? && params[:finalize] then ajax_finalize(survey)
+  when request.xhr? && params[:create] then ajax_question(survey)
+  when params[:finalize] then basic_finalize(survey)
+  else redirect "/surveys/#{survey_id}/create_questions"
   end
 end
 
-get '/surveys/:id/invite_user' do |id|
+get '/surveys/:id/invite_user' do |survey_id|
   users = User.all
-  survey = Survey.find(id)
+  survey = Survey.find(survey_id)
   completions = Completion.where(survey: survey)
   erb :"surveys/invite_user", locals: {users: users, survey: survey, completions: completions}
 end
@@ -64,15 +53,8 @@ end
 
 post '/surveys/:id/fill_out' do |survey_id|
   completion = Completion.find_by(survey_id: survey_id, user_id: current_user.id)
-  total_questions = Survey.find(survey_id).questions.count
-  params[:choice].each do |question_id, choice_id|
-    answer = Answer.new
-    answer.completion = completion
-    answer.choice = Choice.find(choice_id)
-    answer.save
-  end
-  total_answers = completion.answers.count
-  if total_questions <= total_answers
+  Answer.save_answer params[:choice], completion
+  if Question.total(survey_id) <= Answer.total(completion)
     completion.completed = true
     completion.save
     redirect "/surveys/#{survey_id}/summary"

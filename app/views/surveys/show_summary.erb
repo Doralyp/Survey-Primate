@@ -2,6 +2,8 @@
   <% if survey.picture_url %>
     <img id='survey-image' src="<%= survey.picture_url %>" alt="picture of <%= survey.title %>">
   <% end %>
+  <h5>Survey Successfully Created</h5>
+  <p>To add users click here: <a href="/surveys/<%=survey.id%>/invite_user">Invite Users</a></p>
   <h3><%= survey.title %></h3>
   <ul>
     <% survey.questions.each do |q| %>

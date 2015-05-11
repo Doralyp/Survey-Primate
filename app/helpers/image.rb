@@ -1,21 +1,20 @@
-def process_image(filename, file)
+def upload_image file_params, survey
+  url = process_image(file_params)
+  survey.picture_url = url
+end
 
-  open_image(filename, file)
-
+def process_image(file_params)
+  open_image(file_params[:filename], file_params[:tempfile])
   image_name = generate_filename
-
-  convert_image(filename, image_name)
-
-  delete_original_image(filename)
-
+  convert_image(file_params[:filename], image_name)
+  delete_original_image(file_params[:filename])
   return "/imgs/uploads/#{image_name}.png"
-
 end
 
 
 def open_image(filename, file)
   File.open(File.join(APP_ROOT, '/public/imgs/uploads', filename), "w") do |f|
-    f.write(file)
+    f.write(file.read)
   end
 end
 

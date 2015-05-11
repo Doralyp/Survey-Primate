@@ -29,5 +29,4 @@ class Survey < ActiveRecord::Base
       [q.question, q.choices_array]
     end
   end
-
 end
