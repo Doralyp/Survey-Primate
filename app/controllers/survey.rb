@@ -113,6 +113,15 @@ put '/surveys/:id/edit' do |survey_id|
   redirect "/surveys/#{survey.id}"
 end
 
+get '/surveys/:id/delete' do |survey_id|
+  survey = Survey.find(survey_id)
+  erb :"/surveys/delete" , locals: {survey: survey}
+end
+
+post '/surveys/:id/delete' do
+  redirect '/'
+end
+
 get '/surveys/:id/results' do |survey_id|
   survey = Survey.find(survey_id)
   if request.xhr?
