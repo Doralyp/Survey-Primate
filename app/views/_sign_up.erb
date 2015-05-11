@@ -8,7 +8,7 @@
 <div class='small-container center'>
   <form id="form-signup" class="form-horizontal" role="form" method="post" action="/sign_up">
     <div id='signup-name'>
-      <input type="text" name="new_user[name]" class="input-lg form-control" id="name" placeholder="Enter name">
+      <input autofocus type="text" name="new_user[name]" class="input-lg form-control" id="name" placeholder="Enter name">
       <button id="signup-name-btn" class="btn btn-warning btn-lg">Next</button>
     </div>
     <div id='signup-email'>
@@ -35,7 +35,30 @@ $(document).ready(function() {
     $('#signup-email').toggle();
     $('#signup-email-btn').toggle();
     $('#signup-text').text('Great, now enter your email.');
+    $('#email').focus();
   });
+
+    $('#name').keydown(function (e){
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        $('#signup-name-btn').click();
+      }
+    })
+
+    $('#email').keydown(function (e){
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        $('#signup-email-btn').click();
+      }
+    })
+
+    $('#password').keydown(function (e){
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        $('#signup-text').text('User created, logging in');
+        $('#form-signup').submit();
+      }
+    })
 
   $('#signup-email-btn').click(function(e) {
     e.preventDefault();
@@ -44,6 +67,7 @@ $(document).ready(function() {
     $('#signup-password').toggle();
     $('#signup-text').text('Finally, choose a password.');
     $('#signup-submit').toggle();
+    $('#password').focus();
   });
 
   $('#email-back-btn').click(function(e) {
@@ -53,6 +77,7 @@ $(document).ready(function() {
     $('#signup-email').toggle();
     $('#signup-email-btn').toggle();
     $('#signup-text').text('Enter your name, and hit next.');
+    $('#name').focus();
   });
 
   $('#password-back-btn').click(function(e) {
@@ -62,6 +87,7 @@ $(document).ready(function() {
     $('#signup-password').toggle();
     $('#signup-text').text('Great, now enter your email.');
     $('#signup-submit').toggle();
+    $('#email').focus();
   });
 
 
