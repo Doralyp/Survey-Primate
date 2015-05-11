@@ -40,28 +40,6 @@ post '/surveys/:id/create_questions' do |survey_id|
   end
 end
 
-# post '/surveys/:id/finalize_survey' do |survey_id|
-#   survey = Survey.find(survey_id) # NEEDS TO BE REFACTORED - aceburgess
-#   p params[:new_question]
-#   if !!params[:new_question]
-#     new_question = Question.new(params[:new_question])
-#     new_question.survey = survey
-#     new_question.save
-#     new_choices = params[:new_choice].values.map do |input|
-#       if !!input
-#         new_choice = Choice.new(choice: input)
-#         new_choice.question = new_question
-#         new_choice.save
-#       end
-#     end
-#   end
-#   Completion.create(survey_id: survey_id, user_id: current_user.id, completed: true)
-#   if survey
-#     redirect "/surveys/#{survey_id}"
-#   end
-#   redirect '/'
-# end
-
 get '/surveys/:id/invite_user' do |id|
   users = User.all
   survey = Survey.find(id)
