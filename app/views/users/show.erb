@@ -21,9 +21,7 @@
   <div class="panel-body">
     <ul class="completed-surveys list-group">
       <% completed_surveys.each do |survey| %>
-        <% if survey.user.id != current_user.id %>
         <li class="list-group-item"><a href="/surveys/<%= survey.survey.id %>"><%= survey.survey.title %></a></li>
-        <% end %>
       <% end %>
     </ul>
   </div>

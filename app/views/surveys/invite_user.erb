@@ -5,5 +5,21 @@
       <%= erb :"users/_show_single", locals: {user: user, survey: survey, completions: completions} , layout: false %>
     </ul>
   <% end %>
-  <h3>When finished entering users, results can be viewed here.</h3>
+  <h3>When finished entering users, results can be viewed <a href="/surveys/<%= survey.id %>/results">here</a></h3>
 </div>
+<script>
+  $('.btn-invite-user').click(function(e){
+    e.preventDefault();
+      $.ajax({
+          url: this.action,
+          method: this.method,
+          data: $(e.target).serialize()
+        })
+        .done(function(resp){
+          $(e.target).remove();
+        })
+        .error(function(resp){
+          alert(JSON.stringify(resp))
+        })
+   });
+</script>
