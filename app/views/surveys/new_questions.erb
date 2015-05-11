@@ -5,27 +5,37 @@
     <% if survey.picture_url %>
         <img id='survey-image' src="<%= survey.picture_url %>" alt="picture of <%= survey.title %>">
     <% end %>
+    <div id="question-added">
     <% if survey.questions.count > 0 %>
       <h4>Current Questions:</h4>
-        <ul>
-        <% survey.questions.each do |question| %>
-          <li><%= question.question %></li>
-        <% end %>
-        </ul>
+      <ul>
+      <% survey.questions.each do |question| %>
+        <%= erb :"/surveys/_question_added", locals: {question: question}, layout: false %>
+      <% end %>
+      </ul>
     <% end %>
+    </div>
+
     <h5>Add question below</h5>
-    <form action="/surveys/<%=survey.id%>/create_questions" method="post">
+    <form id="create-question" action="/surveys/<%=survey.id%>/create_questions" method="post">
       Question: <input type="text" name="new_question[question]" placeholder="Question"><br><br>
       <h5>Add possible choices</h5>
       Choice 1: <input type="text" name="new_choice[choice1]" placeholder="Choice"><br>
       Choice 2: <input type="text" name="new_choice[choice2]" placeholder="Choice"><br>
       Choice 3: <input type="text" name="new_choice[choice3]" placeholder="Choice"><br>
       Choice 4: <input type="text" name="new_choice[choice4]" placeholder="Choice"><br>
-      <input type="submit" value="Create Another Question"/>
+      <input id="new-question-noajax"type="submit" name="create-another" value="Create Another Question"/>
+      <input id="finalize-survey-noajax" type="submit" name="finalize" value="Create Survey"\>
     </form>
-    <form action="/surveys/<%=survey.id%>/finalize_survey" method="post">
-      <input type="submit" value="Finalize Survey">
+
+    <form style="display: none" id="new-question" action="/surveys/<%=survey.id%>/create_questions?create=true" method="post">
+      <input type="submit" value="Create Another Question">
     </form>
+
+    <form style="display: none" id="finalize-survey" action="/surveys/<%=survey.id%>/create_questions?finalize=true" method="post">
+      <input type="submit" value="Create Survey">
+    </form>
+
   </div>
   <div class="col-md-3"></div>
 </div>
