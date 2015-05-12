@@ -1,33 +1,28 @@
 $(document).ready(function(){
-  var survey_id = $("#SI").attr("survey-id")
-  var completion_id = $("#SI").attr("completion-id")
+  var survey_id = $("#SI").data("survey-id")
+  var completion_id = $("#SI").data("completion-id")
 
-  $.when (
-        $.ajax({
-            url: "/surveys/" + survey_id + "/comparison/" + completion_id,
-            method: 'get',
-            dataType: "json"
-        })
-    ).done(function(response){
+    $.ajax({
+        url: "/surveys/" + survey_id + "/comparison/" + completion_id,
+        method: 'get',
+        dataType: "json"
+    }).done(function(questions){
       var my_data = [];
 
-      for(var i = 0; i < response[0].length; i++){
-
-
+      $.each(questions, function(question_index, question) {
         var my_data_total = 0;
-        var my_ticks = []
 
-        for(var ii = 0; ii < response[0][i][1].length; ii++){
-            my_data_total += response[0][i][1][ii][1];
-        }
+        $.each(question.choices, function(choice_index, choice) {
+          my_data_total += choice.frequency;
+        })
 
-        for(var ii = 0; ii < response[0][i][1].length; ii++){
-          if(response[0][i][1][ii][0] == response[1][i]){
-            my_data.push((response[0][i][1][ii][1]/ my_data_total));
+        $.each(question.choices, function(index, choice) {
+          if(choice.choice == question.answer){
+            my_data.push((choice.frequency / my_data_total));
           }
-        }
-        $(".compare-" + String(i))[0].innerHTML = String(Math.round(my_data[i] * 100))
-      }
+        })
+        $(".compare-" + String(question_index))[0].innerHTML = String(Math.round(my_data[question_index] * 100))
+      })
     }
   )
 })
