@@ -18,4 +18,8 @@ class Answer < ActiveRecord::Base
     completion.answers.count
   end
 
+  def self.find_frequency_of_choice(checked_choice)
+    Answer.where(choice_id: checked_choice.id).count
+  end
+
 end

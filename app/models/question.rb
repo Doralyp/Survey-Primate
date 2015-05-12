@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
   validates :survey_id, presence: true
 
   def choices_hash
-    choices.map { |c| {choice: c.choice, frequency: Answer.where(choice_id: c.id).count} }
+    choices.map { |c| {choice: c.choice, frequency: Answer.find_frequency_of_choice(c)} }
   end
 
   def self.total survey_id

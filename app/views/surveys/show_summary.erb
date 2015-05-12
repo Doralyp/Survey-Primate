@@ -1,6 +1,6 @@
 <script language="javascript" type="text/javascript" src="/js/summary.js"></script>
 
-<div id="SI" completion-id="<%= completion.id %>" survey-id="<%= survey.id %>"></div>
+<div id="SI" data-completion-id="<%= completion.id %>" data-survey-id="<%= survey.id %>"></div>
 <div class="center panel-body panel">
   <% if survey.picture_url %>
     <img id='survey-image' src="<%= survey.picture_url %>" alt="picture of <%= survey.title %>">
