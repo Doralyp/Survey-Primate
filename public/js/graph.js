@@ -7,27 +7,21 @@ $(document).ready(function(){
             method: 'get',
             dataType: "json"
         })
-    ).done(function(response){
+    ).done(function(questions){
         debugger;
-        for(var i = 0; i < response.length; i++){
+        for(var i = 0; i < questions.length; i++){
 
             var my_data = [];
             var my_data_total = 0;
             var my_ticks = []
 
-            for(var ii = 0; ii < response[i][1].length; ii++){
-                // my_data.push([ii+1,response[0][1][ii][1]]);
-                my_data_total += response[i][1][ii][1];
+            for(var ii = 0; ii < questions[i].choices.length; ii++){
+                my_data_total += questions[i].choices[ii].frequency;
+                my_ticks.push([ii + 1, questions[i].choices[ii].choice])
             }
-
-            for(var ii = 0; ii < response[i][1].length; ii++){
-                my_data.push([(response[i][1][ii][1]/ my_data_total),ii+1]);
+            for(var ii = 0; ii < questions[i].choices.length; ii++){
+                my_data.push([(questions[i].choices[ii].frequency/ my_data_total),ii+1]);
             }
-
-            for(var ii = 0; ii < response[i][1].length; ii++){
-                my_ticks.push([ii + 1, response[i][1][ii][0]])
-            }
-            debugger;
 
             // plot the data
             $.plot($("#graph" + String(i)), [

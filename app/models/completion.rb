@@ -9,4 +9,8 @@ class Completion < ActiveRecord::Base
   def choice_array
     answers.map { |ans| ans.choice.choice }
   end
+
+  def choice_by_question(question)
+    answers.find { |answer| answer.choice.question == question }.choice.choice
+  end
 end

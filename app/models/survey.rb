@@ -24,9 +24,11 @@ class Survey < ActiveRecord::Base
     end
   end
 
-  def questions_choices_array
-    questions.map do |q|
-      [q.question, q.choices_array]
-    end
+  def questions_choices_hash
+    questions.map { |q| {question: q.question, choices: q.choices_hash } }
+  end
+
+  def questions_choices_answers_hash(completion)
+    questions.map { |q| {question: q.question, choices: q.choices_hash, answer: completion.choice_by_question(q) } }
   end
 end
